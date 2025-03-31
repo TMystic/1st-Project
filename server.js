@@ -30,7 +30,9 @@ const PORT = 3000;
 // Serve static files from "public" directory
 app.use(express.static(path.join(path.resolve(), 'public')));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:"*"
+}));
 // Set up multer for file uploads
 const multerStorage = multer.diskStorage({
     destination: function (req, file, cb) {
