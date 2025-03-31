@@ -90,6 +90,14 @@ app.get('/all-video', async (req, res) => {
     const allvideo = await newVideos.find();
     res.json(allvideo);
 })
+
+app.get('/all-searched-video/:search', async (req, res) => {
+    console.log(95, req.params.search);
+    const searchQuery = new RegExp(req.params.search, 'i'); // 'i' makes it case-insensitive
+    const allvideo = await newVideos.find({ title: { $regex: searchQuery } });
+    res.json(allvideo);
+});
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
